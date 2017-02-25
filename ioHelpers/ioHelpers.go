@@ -4,15 +4,16 @@ import (
 	"strings"
 	"errors"
 	"strconv"
+	"log"
 )
 
 func check(e error) {
 	if e != nil {
-		panic(e)
+		log.Fatal(e)
 	}
 }
 
-func GetShipPositions(battleGroundSize int, numberOfShips int, input string)([][]string, error) {
+func PrepareShipPositions(battleGroundSize int, numberOfShips int, input string)([][]string, error) {
 	shipPositions := make([][]string,battleGroundSize)
 	for i:=0; i < battleGroundSize; i++ {
 		shipPositions[i] = make([]string, battleGroundSize)
@@ -38,10 +39,10 @@ func GetShipPositions(battleGroundSize int, numberOfShips int, input string)([][
 	return shipPositions, err
 }
 
-func GetAttackPositions(battleGroundSize int, totalMissiles int, input string)([][]string, error) {
-	attackPositions := make([][]string,battleGroundSize)
-	for i:=0; i < battleGroundSize; i++ {
-		attackPositions[i] = make([]string, battleGroundSize)
+func PrepareAttackPositions(totalMissiles int, input string)([][]string, error) {
+	attackPositions := make([][]string,totalMissiles)
+	for i:=0; i < totalMissiles; i++ {
+		attackPositions[i] = make([]string, totalMissiles)
 	}
 	var err error
 	playerAttacks := strings.Split(strings.TrimSpace(input), ":")

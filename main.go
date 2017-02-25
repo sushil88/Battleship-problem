@@ -20,7 +20,7 @@ type playerInfo struct {
 
 func check(e error) {
 	if e != nil {
-		panic(e)
+		log.Fatal(e)
 	}
 }
 
@@ -53,13 +53,13 @@ func main() {
 		}
 
 		if scanner.Scan() { // Get player 1 ship positions
-			player1.ShipPositions, err = ioHelpers.GetShipPositions(battleGroundSize, numberOfShips, scanner.Text())
+			player1.ShipPositions, err = ioHelpers.PrepareShipPositions(battleGroundSize, numberOfShips, scanner.Text())
 		} else {
 			check(errors.New("No ship positions available for palyer 1"))
 		}
 
 		if scanner.Scan() { // Get player 2 ship positions
-			player2.ShipPositions, err = ioHelpers.GetShipPositions(battleGroundSize, numberOfShips, scanner.Text())
+			player2.ShipPositions, err = ioHelpers.PrepareShipPositions(battleGroundSize, numberOfShips, scanner.Text())
 			check(err)
 		} else {
 			check(errors.New("No ship positions available for palyer 2"))
@@ -73,13 +73,13 @@ func main() {
 		}
 
 		if scanner.Scan() { // Get player 1 missile moves
-			player1.AttackMoves, err = ioHelpers.GetAttackPositions(battleGroundSize, totalMissiles, scanner.Text())
+			player1.AttackMoves, err = ioHelpers.PrepareAttackPositions(totalMissiles, scanner.Text())
 			check(err)
 		} else {
 			check(errors.New("No attack positions available for palyer 1"))
 		}
 		if scanner.Scan() { // Get player 2 missile moves
-			player2.AttackMoves, err = ioHelpers.GetAttackPositions(battleGroundSize, totalMissiles, scanner.Text())
+			player2.AttackMoves, err = ioHelpers.PrepareAttackPositions(totalMissiles, scanner.Text())
 			check(err)
 		} else {
 			check(errors.New("No attack positions available for player 2"))
